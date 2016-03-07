@@ -15,6 +15,15 @@ db:
     MYSQL_PASSWORD: secret
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
+redis:
+  restart: always
+  image: redis:latest
+  container_name: redis_db
+  ports:
+    - "6379:6379"
+  volumes:
+    - ./data/redis:/data
+
 # Beanstalkd
 queue:
   restart: always
@@ -35,6 +44,10 @@ php:
     - ./conf/php-fpm:/etc/php-fpm.d
     - ./logs/php-fpm:/var/log/php-fpm
     - ./http:/srv/http
+  links:
+    - db
+    - queue
+    - redis
 
 # Nginx
 nginx:
@@ -53,6 +66,4 @@ nginx:
     APP_ENV: development
 
   links:
-    - db
-    - queue
     - php
