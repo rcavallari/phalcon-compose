@@ -1,4 +1,6 @@
+# MySQL
 db:
+  restart: always
   image: mysql:latest
   container_name: mysql_db
   expose:
@@ -12,17 +14,31 @@ db:
     MYSQL_USER: phalcon
     MYSQL_PASSWORD: secret
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-app:
+
+# Beanstalkd
+queue:
+  restart: always
+  image: klay/beanstalkd
+  container_name: beanstalkd_queue
+  ports:
+    - "11300:11300"
+
+# PHP FPM
+php:
+  restart: always
   image: klay/php-fpm
-  container_name: php_app
-  tty: true
+  container_name: php56_app
   ports:
     - "9000:9000"
     - "10000:10000"
   volumes:
+    - ./conf/php-fpm:/etc/php-fpm.d
     - ./logs/php-fpm:/var/log/php-fpm
-web:
-  tty: true
+    - ./http:/srv/http
+
+# Nginx
+nginx:
+  restart: always
   image: klay/nginx
   container_name: nginx_web
   ports:
@@ -31,7 +47,12 @@ web:
     - ./certs/nginx:/etc/nginx/certs
     - ./conf/nginx:/etc/nginx/conf.d
     - ./vhost:/etc/nginx/sites-enabled
-    - ./logs/nginx:/var/log/nginx
     - ./http:/srv/http
+  environment:
+    # production | development | staging | testing
+    APP_ENV: development
+
   links:
-    - app
+    - db
+    - queue
+    - php
