@@ -1,4 +1,10 @@
-# MySQL
+application:
+  build: containers/core
+  container_name: core_app
+  volumes:
+    - ./shared/html:/var/www/phalcon
+  tty: true
+
 db:
   restart: always
   image: mysql:latest
@@ -24,46 +30,52 @@ redis:
   volumes:
     - ./data/redis:/data
 
-# Beanstalkd
 queue:
   restart: always
   image: klay/beanstalkd
   container_name: beanstalkd_queue
   ports:
     - "11300:11300"
+  volumes:
+    - ./data/beanstalk:/data
 
-# PHP FPM
 php:
-  restart: always
   image: klay/php-fpm
-  container_name: php56_app
+  restart: always
+  container_name: php_5.6_fpm
+  expose:
+    - 9000:9000
+    - 10000:10000
   ports:
-    - "9000:9000"
-    - "10000:10000"
+    - 9000:9000
+    - 10000:10000
   volumes:
     - ./conf/php-fpm:/etc/php-fpm.d
-    - ./logs/php-fpm:/var/log/php-fpm
-    - ./http:/srv/http
+  volumes_from:
+    - application
   links:
     - db
     - queue
     - redis
 
-# Nginx
 nginx:
   restart: always
   image: klay/nginx
   container_name: nginx_web
+  expose:
+    - 80:80
+    - 443:443
   ports:
-    - "80:80"
+    - 80:80
+    - 443:443
+  links:
+      - php
   volumes:
-    - ./certs/nginx:/etc/nginx/certs
-    - ./conf/nginx:/etc/nginx/conf.d
-    - ./vhost:/etc/nginx/sites-enabled
-    - ./http:/srv/http
+    - ./conf/nginx/certs:/etc/nginx/certs
+    - ./conf/nginx/conf.d:/etc/nginx/conf.d
+    - ./conf/nginx/vhost:/etc/nginx/sites-enabled
+  volumes_from:
+    - application
   environment:
     # production | development | staging | testing
-    APP_ENV: development
-
-  links:
-    - php
+    APPLICATION_ENV: development
