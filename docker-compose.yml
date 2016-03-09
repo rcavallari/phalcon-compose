@@ -21,6 +21,12 @@ db:
     MYSQL_PASSWORD: secret
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
+memcached:
+  image: memcached:1.4
+  container_name: memcached_db
+  ports:
+    - "11211:11211"
+
 redis:
   restart: always
   image: redis:latest
@@ -57,6 +63,7 @@ php:
     - db
     - queue
     - redis
+    - memcached
 
 nginx:
   restart: always
