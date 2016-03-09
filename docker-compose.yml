@@ -44,11 +44,11 @@ php:
   restart: always
   container_name: php_5.6_fpm
   expose:
-    - 9000:9000
-    - 10000:10000
+    - "9000:9000"
+    - "10000:10000"
   ports:
-    - 9000:9000
-    - 10000:10000
+    - "9000:9000"
+    - "10000:10000"
   volumes:
     - ./conf/php-fpm:/etc/php-fpm.d
   volumes_from:
@@ -63,11 +63,11 @@ nginx:
   image: klay/nginx
   container_name: nginx_web
   expose:
-    - 80:80
-    - 443:443
+    - "80:80"
+    - "443:443"
   ports:
-    - 80:80
-    - 443:443
+    - "80:80"
+    - "443:443"
   links:
       - php
   volumes:
