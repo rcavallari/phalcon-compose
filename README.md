@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose)
 
-Build Status
-
 Just a little Docker POC in order to have a complete stack for running Phalcon into Docker containers using docker-compose tool.
 
 ## Get Started
@@ -12,6 +10,7 @@ Just a little Docker POC in order to have a complete stack for running Phalcon i
 
 To run this stack on your machine, you need at least:
 
+* Operating System: Windows, Linux, or OSX
 * [Docker Engine][1] >= 1.7.1
 * [Docker Compose][2] >= 1.4.2
 
@@ -24,7 +23,7 @@ $ git clone git@github.com:sergeyklay/phalcon-compose.git
 ```
 
 Next, put your Phalcon application into `application` folder.
-Then add `your_site_name.dev` in your /etc/hosts file as follows:
+Then add `your_site_name.dev` in your ``/etc/hosts`` file as follows:
 
 ```
 127.0.0.1	your_site_name.dev
@@ -32,7 +31,7 @@ Then add `your_site_name.dev` in your /etc/hosts file as follows:
 
 ## Usage
 
-Run:
+Now you are ready to build, creates, start, and attach to containers for your application, run:
 
 ```sh
 docker-compose up -d
@@ -40,7 +39,7 @@ docker-compose up -d
 
 and you can visit your Phalcon application on the following URL: http://your_site_name.dev
 
-### How it works
+### Containers Included
 
 Here are the `docker` & `docker-compose` built images:
 
