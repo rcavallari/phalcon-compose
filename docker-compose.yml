@@ -15,6 +15,7 @@ db:
     - "3307:3306"
   volumes:
     - ./conf/mysql:/etc/mysql/conf.d
+    - ./data/mysql:/var/lib/mysql
   environment:
     MYSQL_DATABASE: phalcondb
     MYSQL_USER: phalcon
