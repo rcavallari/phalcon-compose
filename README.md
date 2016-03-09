@@ -8,14 +8,14 @@ This is an unofficial, open-source and community-driven boilerplate for Phalcon 
 It's an attempt of standardizing and making it easier to bootstrap Phalcon applications ready for development and production environments.
 The main tools used are Phalcon, Docker and Docker Compose. Other things included are:
 
-- Nginx
-- MySQL
-- Memcached
+- Nginx 1.9.11
+- MySQL 5.7.11
+- Memcached 1.4
 - PHP 5.6.19 + PHP-FPM
-- Xdebug
-- Opcache
-- Beanstalk
-- Redis
+- Xdebug 2.3.3
+- Opcache 7.0.6-dev
+- Beanstalk 1.10
+- Redis 3.0.7
 
 ## Get Started
 
@@ -56,13 +56,13 @@ and you can visit your Phalcon application on the following URL: http://your_sit
 
 Here are the `docker` & `docker-compose` built images:
 
-* `application`: This is the Phalcon 2.1 application code container
-* `db`: This is the MySQL 5.7 database container
-* `redis`: This is the Redis 3.0 database container
-* `queue`: This is the Beanstalk 1.10 queue container
-* `php`: This is the PHP-FPM 5.6 container in which the application volume is mounted
-* `nginx`: This is the Nginx Mainline webserver container in which application volume is mounted too
-* `memcached`: This is the Memcached Server 1.4 container
+* `application`: Phalcon 2.1.x application code container
+* `db`:          MySQL 5.7.11 database container
+* `redis`:       Redis 3.0 database container
+* `memcached`:   Memcached Server 1.4 container
+* `queue`:       Beanstalk 1.10 queue container
+* `php`:         PHP 5.6.19 + PHP-FPM container in which the application volume is mounted
+* `nginx`:       Nginx 1.9.11 webserver container in which application volume is mounted too
 
 This results in the following running containers:
 
