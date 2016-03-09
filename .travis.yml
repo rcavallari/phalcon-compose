@@ -25,6 +25,7 @@ script:
   - docker-compose version
   - docker-compose up -d
   - docker-compose ps
+  - docker exec -ti php_5.6_fpm php --ri phalcon
 
 notifications:
   email:
