@@ -2,7 +2,7 @@ application:
   build: containers/core
   container_name: core_app
   volumes:
-    - ./shared/html:/var/www/phalcon
+    - ./application:/var/www/phalcon
   tty: true
 
 db:
