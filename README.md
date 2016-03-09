@@ -1,8 +1,21 @@
-# Docker Phalcon 2.1
+<img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-[![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose)
+# Phalcon 2.1 Docker Edition [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![by](https://img.shields.io/badge/by-%40sergeyklay-blue.svg)](https://github.com/sergeyklay)
 
-Just a little Docker POC in order to have a complete stack for running Phalcon into Docker containers using docker-compose tool.
+The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
+
+This is an unofficial, open-source and community-driven boilerplate for Phalcon projects that run on [Docker][0].
+It's an attempt of standardizing and making it easier to bootstrap Phalcon applications ready for development and production environments.
+The main tools used are Phalcon, Docker and Docker Compose. Other things included are:
+
+- Nginx
+- MySQL
+- Memcached
+- PHP 5.6.19 + PHP-FPM
+- Xdebug
+- Opcache
+- Beanstalk
+- Redis
 
 ## Get Started
 
@@ -49,6 +62,7 @@ Here are the `docker` & `docker-compose` built images:
 * `queue`: This is the Beanstalk 1.10 queue container
 * `php`: This is the PHP-FPM 5.6 container in which the application volume is mounted
 * `nginx`: This is the Nginx Mainline webserver container in which application volume is mounted too
+* `memcached`: This is the Memcached Server 1.4 container
 
 This results in the following running containers:
 
@@ -59,6 +73,7 @@ $ docker-compose ps
 ----------------------------------------------------------------------------------------------------------
 beanstalkd_queue   beanstalkd -p 11300 -b /data   Up      0.0.0.0:11300->11300/tcp
 core_app           bash                           Up
+memcached_db       /entrypoint.sh memcached       Up      0.0.0.0:11211->11211/tcp
 mysql_db           /entrypoint.sh mysqld          Up      0.0.0.0:3307->3306/tcp
 nginx_web          nginx -g daemon off;           Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
 php_5.6_fpm        /usr/sbin/php5-fpm -F          Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp
@@ -69,5 +84,6 @@ redis_db           /entrypoint.sh redis-server    Up      0.0.0.0:6379->6379/tcp
 
 You can access logs by using `docker logs <container_name>` into your host machine.
 
+[0]: https://www.docker.com/
 [1]: https://docs.docker.com/installation/
 [2]: https://docs.docker.com/compose/install/
