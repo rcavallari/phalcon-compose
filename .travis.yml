@@ -4,15 +4,14 @@ dist: trusty
 env:
   - DOCKER_COMPOSE_VERSION="1.4.2"
   - DOCKER_COMPOSE_VERSION="1.5.2"
-  #- DOCKER_COMPOSE_VERSION="1.6.2"
+  - DOCKER_COMPOSE_VERSION="1.6.2"
 
 cache:
   - apt
 
-services:
-  - docker
-
 before_install:
+  - docker --version
+  - sudo apt-get update -qq && sudo apt-get upgrade -y docker && sudo service docker restart
   - /usr/local/bin/docker-compose --version
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
