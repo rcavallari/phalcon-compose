@@ -22,6 +22,21 @@ db:
     MYSQL_PASSWORD: secret
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
+sqlite:
+  build: containers/sqlite
+  command: socat TCP-L:12345,fork,reuseaddr EXEC:'sqlite3 /db',pty
+  container_name: sqlite_db
+  volumes:
+  - ./data/sqlite:/data
+sqlite_proxy:
+  build: containers/sqlite
+  command: socat TCP-L:12346,fork,reuseaddr TCP:sqliteserver:12345
+  container_name: sqlite_proxy
+  links:
+    - sqlite:sqliteserver
+  ports:
+    - "12346:12346"
+
 memcached:
   image: memcached:1.4
   container_name: memcached_db

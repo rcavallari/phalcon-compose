@@ -16,6 +16,7 @@ The main tools used are Phalcon, Docker and Docker Compose. Other things include
 - Opcache 7.0.6-dev
 - Beanstalk 1.10
 - Redis 3.0.7
+- SQLite 3.8.2
 
 ## Get Started
 
@@ -36,7 +37,7 @@ $ git clone git@github.com:sergeyklay/phalcon-compose.git
 ```
 
 Next, put your Phalcon application into `application` folder.
-Then add `your_site_name.dev` in your ``/etc/hosts`` file as follows:
+Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
 
 ```
 127.0.0.1	your_site_name.dev
@@ -56,13 +57,17 @@ and you can visit your Phalcon application on the following URL: http://your_sit
 
 Here are the `docker` & `docker-compose` built images:
 
-* `application`: Phalcon 2.1.x application code container
-* `db`:          MySQL 5.7.11 database container
-* `redis`:       Redis 3.0 database container
-* `memcached`:   Memcached Server 1.4 container
-* `queue`:       Beanstalk 1.10 queue container
-* `php`:         PHP 5.6.19 + PHP-FPM container in which the application volume is mounted
-* `nginx`:       Nginx 1.9.11 webserver container in which application volume is mounted too
+```
+ application         Phalcon 2.1.x application code container
+ db                  MySQL 5.7.11 database container
+ redis               Redis 3.0 database container
+ memcached           Memcached Server 1.4 container
+ queue               Beanstalk 1.10 queue container
+ php                 PHP 5.6.19 + PHP-FPM container in which the application volume is mounted
+ nginx               Nginx 1.9.11 webserver container in which application volume is mounted too
+ sqlite_db           SQLite database
+ sqlite_proxy        Proxy to the SQLite server
+```
 
 This results in the following running containers:
 
@@ -71,13 +76,15 @@ $ docker-compose ps
 
       Name                   Command              State                        Ports
 ----------------------------------------------------------------------------------------------------------
-beanstalkd_queue   beanstalkd -p 11300 -b /data   Up      0.0.0.0:11300->11300/tcp
-core_app           bash                           Up
-memcached_db       /entrypoint.sh memcached       Up      0.0.0.0:11211->11211/tcp
-mysql_db           /entrypoint.sh mysqld          Up      0.0.0.0:3307->3306/tcp
-nginx_web          nginx -g daemon off;           Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
-php_5.6_fpm        /usr/sbin/php5-fpm -F          Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp
-redis_db           /entrypoint.sh redis-server    Up      0.0.0.0:6379->6379/tcp
+beanstalkd_queue   beanstalkd -p 11300 -b /data     Up      0.0.0.0:11300->11300/tcp                         
+core_app           /bin/bash                        Up                                                       
+memcached_db       /entrypoint.sh memcached         Up      0.0.0.0:11211->11211/tcp                         
+mysql_db           /entrypoint.sh mysqld            Up      0.0.0.0:3307->3306/tcp                           
+nginx_web          nginx -g daemon off;             Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp         
+php_5.6_fpm        php5-fpm -F                      Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp 
+redis_db           /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379/tcp                           
+sqlite_db          socat TCP-L:12345,fork,reu ...   Up      12345/tcp                                        
+sqlite_proxy       socat TCP-L:12346,fork,reu ...   Up      12345/tcp, 0.0.0.0:12346->12346/tcp 
 ```
 
 ### Read logs
