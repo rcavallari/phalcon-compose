@@ -1,104 +1,100 @@
-application:
-  build: containers/core
-  container_name: core_app
-  volumes:
-    - ./application:/var/www/phalcon
-  tty: true
+version: '2'
 
-mysql:
-  restart: always
-  image: mysql:latest
-  container_name: mysql_db
-  expose:
-    - "3306"
-  ports:
-    - "3307:3306"
-  volumes:
-    - ./conf/mysql:/etc/mysql/conf.d
-    - ./data/mysql:/var/lib/mysql
-  environment:
-    MYSQL_DATABASE: phalcondb
-    MYSQL_USER: phalcon
-    MYSQL_PASSWORD: secret
-    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+services:
+  application:
+    build: containers/core
+    container_name: phalcon_volume
+    volumes:
+      - ./application:/var/www/phalcon
+    tty: true
 
-sqlite:
-  build: containers/sqlite
-  command: socat TCP-L:12345,fork,reuseaddr EXEC:'sqlite3 /db',pty
-  container_name: sqlite_db
-  volumes:
-    - ./data/sqlite:/data
+  mysql:
+    restart: always
+    image: mysql:5.7
+    container_name: phalcon_mysql
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./conf/mysql:/etc/mysql/conf.d
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: phalcondb
+      MYSQL_USER: phalcon
+      MYSQL_PASSWORD: secret
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
-sqlite_proxy:
-  build: containers/sqlite
-  command: socat TCP-L:12346,fork,reuseaddr TCP:sqliteserver:12345
-  container_name: sqlite_proxy
-  links:
-    - sqlite:sqliteserver
-  ports:
-    - "12346:12346"
+  memcached:
+    restart: always
+    image: memcached:1.4
+    container_name: phalcon_memcached
+    ports:
+      - "11211:11211"
 
-memcached:
-  restart: always
-  image: memcached:1.4
-  container_name: memcached_db
-  ports:
-    - "11211:11211"
+  queue:
+    restart: always
+    image: klay/beanstalkd
+    container_name: phalcon_beanstalkd
+    ports:
+      - "11300:11300"
+    volumes:
+      - ./data/beanstalk:/data
 
-redis:
-  restart: always
-  image: redis:latest
-  container_name: redis_db
-  ports:
-    - "6379:6379"
-  volumes:
-    - ./data/redis:/data
+  aerospike:
+    restart: always
+    image: aerospike/aerospike-server
+    container_name: phalcon_aerospike
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "3002:3002"
+      - "3003:3003"
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: phalcon_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
 
-queue:
-  restart: always
-  image: klay/beanstalkd
-  container_name: beanstalkd_queue
-  ports:
-    - "11300:11300"
-  volumes:
-    - ./data/beanstalk:/data
+  php:
+    image: klay/php-fpm
+    restart: always
+    container_name: phalcon_php_5.6_fpm
+    expose:
+      - "9000"
+      - "10000"
+    ports:
+      - "9000:9000"
+      - "10000:10000"
+    volumes_from:
+      - application
+    depends_on:
+      - mysql
+      - queue
+      - redis
+      - memcached
 
-php:
-  image: klay/php-fpm
-  restart: always
-  container_name: php_5.6_fpm
-  expose:
-    - "9000"
-    - "10000"
-  ports:
-    - "9000:9000"
-    - "10000:10000"
-  volumes_from:
-    - application
-  links:
-    - mysql
-    - queue
-    - redis
-    - memcached
-
-nginx:
-  restart: always
-  image: klay/nginx
-  container_name: nginx_web
-  expose:
-    - "80"
-    - "443"
-  ports:
-    - "80:80"
-    - "443:443"
-  links:
-      - php
-  volumes:
-    - ./conf/nginx/certs:/etc/nginx/certs
-    - ./conf/nginx/conf.d:/etc/nginx/conf.d
-    - ./conf/nginx/vhost:/etc/nginx/sites-enabled
-  volumes_from:
-    - application
-  environment:
-    # production | development | staging | testing
-    APPLICATION_ENV: development
+  nginx:
+    restart: always
+    image: klay/nginx
+    container_name: phalcon_nginx
+    expose:
+      - "80"
+      - "443"
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+        - php
+    volumes:
+      - ./conf/nginx/certs:/etc/nginx/certs
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf/nginx/vhost:/etc/nginx/sites-enabled
+    volumes_from:
+      - application
+    environment:
+      # production | development | staging | testing
+      APPLICATION_ENV: development

@@ -16,7 +16,7 @@ The main tools used are Phalcon, Docker and Docker Compose. Other things include
 - Opcache 7.0.6-dev
 - Beanstalk 1.10
 - Redis 3.0.7
-- SQLite 3.8.2
+- Aerospike 3.7.4
 
 ## Get Started
 
@@ -25,8 +25,8 @@ The main tools used are Phalcon, Docker and Docker Compose. Other things include
 To run this stack on your machine, you need at least:
 
 * Operating System: Windows, Linux, or OSX
-* [Docker Engine][1] >= 1.7.1
-* [Docker Compose][2] >= 1.4.2
+* [Docker Engine][1] >= 1.10
+* [Docker Compose][2] >= 1.6.2
 
 ### Installation
 
@@ -48,7 +48,7 @@ Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
 Now you are ready to build, creates, start, and attach to containers for your application, run:
 
 ```sh
-docker-compose up -d
+docker-compose -p phalcon up -d
 ```
 
 and you can visit your Phalcon application on the following URL: http://your_site_name.dev
@@ -65,26 +65,25 @@ Here are the `docker-compose` services:
  queue               Beanstalk 1.10 queue container
  php                 PHP 5.6.19 + PHP-FPM container in which the application volume is mounted
  nginx               Nginx 1.9.11 webserver container in which application volume is mounted too
- sqlite_db           SQLite database
- sqlite_proxy        Proxy to the SQLite server
+ aerospike           The Aerospike Server 3.7.4
 ```
 
 This results in the following running containers:
 
 ```sh
-$ docker-compose ps
+$ docker-compose -p phalcon ps
 
-      Name                   Command              State                        Ports
-----------------------------------------------------------------------------------------------------------
-beanstalkd_queue   beanstalkd -p 11300 -b /data     Up      0.0.0.0:11300->11300/tcp                         
-core_app           /bin/bash                        Up                                                       
-memcached_db       /entrypoint.sh memcached         Up      0.0.0.0:11211->11211/tcp                         
-mysql_db           /entrypoint.sh mysqld            Up      0.0.0.0:3307->3306/tcp                           
-nginx_web          nginx -g daemon off;             Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp         
-php_5.6_fpm        php5-fpm -F                      Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp 
-redis_db           /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379/tcp                           
-sqlite_db          socat TCP-L:12345,fork,reu ...   Up      12345/tcp                                        
-sqlite_proxy       socat TCP-L:12346,fork,reu ...   Up      12345/tcp, 0.0.0.0:12346->12346/tcp 
+       Name                     Command              State                                               Ports
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+phalcon_aerospike     /entrypoint.sh asd             Up      0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:3002->3002/tcp, 0.0.0.0:3003->3003/tcp
+phalcon_beanstalkd    beanstalkd -p 11300 -b /data   Up      0.0.0.0:11300->11300/tcp
+phalcon_memcached     /entrypoint.sh memcached       Up      0.0.0.0:11211->11211/tcp
+phalcon_mysql         /entrypoint.sh mysqld          Up      0.0.0.0:3306->3306/tcp
+phalcon_nginx         nginx -g daemon off;           Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
+phalcon_php_5.6_fpm   php5-fpm -F                    Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp
+phalcon_redis         /entrypoint.sh redis-server    Up      0.0.0.0:6379->6379/tcp
+phalcon_volume        /bin/bash                      Up
+
 ```
 
 ### Read logs

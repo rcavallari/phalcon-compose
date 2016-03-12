@@ -2,8 +2,6 @@ sudo: required
 dist: trusty
 
 env:
-  - DOCKER_COMPOSE_VERSION="1.4.2"
-  - DOCKER_COMPOSE_VERSION="1.5.2"
   - DOCKER_COMPOSE_VERSION="1.6.2"
 
 cache:
@@ -23,9 +21,10 @@ before_install:
 
 script:
   - docker-compose version
-  - docker-compose up -d
-  - docker-compose ps
-  - docker exec -ti php_5.6_fpm php --ri phalcon
+  - docker-compose -p up -d
+  - sleep 3
+  - docker-compose -p phalcon ps
+  - docker exec -ti phalcon_php_5.6_fpm php --ri phalcon
 
 notifications:
   email:
