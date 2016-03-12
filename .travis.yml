@@ -21,7 +21,7 @@ before_install:
 
 script:
   - docker-compose version
-  - docker-compose -p up -d
+  - docker-compose -p phalcon up -d
   - sleep 3
   - docker-compose -p phalcon ps
   - docker exec -ti phalcon_php_5.6_fpm php --ri phalcon
