@@ -55,11 +55,11 @@ and you can visit your Phalcon application on the following URL: http://your_sit
 
 ### Containers Included
 
-Here are the `docker` & `docker-compose` built images:
+Here are the `docker-compose` services:
 
 ```
  application         Phalcon 2.1.x application code container
- db                  MySQL 5.7.11 database container
+ mysql               MySQL 5.7.11 database container
  redis               Redis 3.0 database container
  memcached           Memcached Server 1.4 container
  queue               Beanstalk 1.10 queue container
