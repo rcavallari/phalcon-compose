@@ -1,6 +1,6 @@
 <img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-# Phalcon 2.1 Docker Edition [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-2.1.x](https://img.shields.io/badge/phalcon-2.1.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/2.1.x)
+# Phalcon Docker Edition [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-2.1.x](https://img.shields.io/badge/phalcon-2.1.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/2.1.x)
 
 The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
 
@@ -45,7 +45,7 @@ Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
 
 ## Usage
 
-Now you are ready to build, creates, start, and attach to containers for your application, run:
+Now you are ready to build, create, start, and attach to containers for your application, run:
 
 ```sh
 docker-compose -p phalcon up -d
@@ -61,11 +61,11 @@ Here are the `docker-compose` services:
  application         Phalcon 2.1.x application code container
  mysql               MySQL 5.7.11 database container
  redis               Redis 3.0 database container
- memcached           Memcached Server 1.4 container
+ memcached           Memcached 1.4 server container
  queue               Beanstalk 1.10 queue container
- php                 PHP 5.6.19 + PHP-FPM container in which the application volume is mounted
- nginx               Nginx 1.9.11 webserver container in which application volume is mounted too
- aerospike           The Aerospike Server 3.7.4
+ php                 PHP-FPM 5.6.19 container
+ nginx               Nginx 1.9.11 webserver container
+ aerospike           Aerospike 3.7.4 server container
 ```
 
 This results in the following running containers:
