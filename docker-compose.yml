@@ -50,6 +50,7 @@ services:
       - "3001:3001"
       - "3002:3002"
       - "3003:3003"
+
   redis:
     restart: always
     image: redis:latest
@@ -62,7 +63,7 @@ services:
   php:
     image: klay/php-fpm
     restart: always
-    container_name: phalcon_php_5.6_fpm
+    container_name: phalcon_php
     expose:
       - "9000"
       - "10000"
