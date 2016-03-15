@@ -8,7 +8,7 @@ This is an unofficial, open-source and community-driven boilerplate for Phalcon 
 It's an attempt of standardizing and making it easier to bootstrap Phalcon applications ready for development and production environments.
 The main tools used are Phalcon, Docker and Docker Compose. Other things included are:
 
-- Nginx 1.9.11
+- Nginx 1.9.12
 - MySQL 5.7.11
 - Memcached 1.4
 - PHP-FPM 5.6.19
@@ -66,7 +66,7 @@ Here are the `docker-compose` services:
  memcached           Memcached 1.4 server container
  queue               Beanstalk 1.10 queue container
  php                 PHP-FPM 5.6.19 container
- nginx               Nginx 1.9.11 webserver container
+ nginx               Nginx 1.9.12 webserver container
  aerospike           Aerospike 3.7.4 server container
  posgres             PostgreSQL 9.5.1 server container
  mongo               MongoDB 3.2.4 server container
