@@ -4,10 +4,9 @@ services:
   application:
     build: containers/core
     container_name: phalcon_app_volume
-
-  mysql_volume:
-    build: containers/mysql_volume
-    container_name: phalcon_mysql_volume
+    volumes:
+      - ./application:/var/www/phalcon
+    tty: true
 
   mongo:
     restart: always
@@ -18,7 +17,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./data/mongo:/data/db
+      - mongo:/data/db
 
   postgres:
     restart: always
@@ -29,7 +28,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data/pgdata
+      - postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ''
       PGDATA: /var/lib/postgresql/data/pgdata
@@ -42,8 +41,8 @@ services:
       - "3306"
     ports:
       - "3306:3306"
-    volumes_from:
-      - mysql_volume
+    volumes:
+      - mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: phalcondb
       MYSQL_USER: phalcon
@@ -64,7 +63,7 @@ services:
     ports:
       - "11300:11300"
     volumes:
-      - ./data/beanstalk:/data
+      - beanstalk:/data
 
   aerospike:
     restart: always
@@ -83,7 +82,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./data/redis:/data
+      - redis:/data
 
   php:
     image: klay/php-fpm
@@ -124,3 +123,15 @@ services:
     environment:
       # production | development | staging | testing
       APPLICATION_ENV: development
+
+volumes:
+  mongo:
+    driver: local
+  postgres:
+    driver: local
+  mysql:
+    driver: local
+  beanstalk:
+    driver: local
+  redis:
+    driver: local
