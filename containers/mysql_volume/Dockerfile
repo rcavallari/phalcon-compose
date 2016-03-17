@@ -6,7 +6,7 @@
 FROM busybox
 
 RUN adduser -H -D mysql mysql && \
-    mkdir /var/lib/mysql && \
+    mkdir -p /var/lib/mysql && \
     chown -R mysql:mysql /var/lib/mysql
 
 # Set up the application directory
