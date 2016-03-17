@@ -3,7 +3,7 @@ version: '2'
 services:
   application:
     build: containers/core
-    container_name: phalcon_app_volume
+    container_name: phalcon_volume
     volumes:
       - ./application:/var/www/phalcon
     tty: true
