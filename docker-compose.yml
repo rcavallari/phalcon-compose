@@ -3,10 +3,11 @@ version: '2'
 services:
   application:
     build: containers/core
-    container_name: phalcon_volume
-    volumes:
-      - ./application:/var/www/phalcon
-    tty: true
+    container_name: phalcon_app_volume
+
+  mysql_volume:
+    build: containers/mysql_volume
+    container_name: phalcon_mysql_volume
 
   mongo:
     restart: always
@@ -41,9 +42,8 @@ services:
       - "3306"
     ports:
       - "3306:3306"
-    volumes:
-      - ./conf/mysql:/etc/mysql/conf.d
-      - ./data/mysql:/var/lib/mysql
+    volumes_from:
+      - mysql_volume
     environment:
       MYSQL_DATABASE: phalcondb
       MYSQL_USER: phalcon
