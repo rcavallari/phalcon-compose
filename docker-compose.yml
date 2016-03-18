@@ -6,6 +6,8 @@ services:
     container_name: phalcon_volume
     volumes:
       - ./application:/var/www/phalcon
+      - cache:/var/www/phalcon/cache
+      - logs:/var/www/phalcon/logs
     tty: true
 
   mongo:
@@ -125,6 +127,10 @@ services:
       APPLICATION_ENV: development
 
 volumes:
+  logs
+    driver: local
+  cache:
+    driver: local
   mongo:
     driver: local
   postgres:
