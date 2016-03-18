@@ -127,7 +127,7 @@ services:
       APPLICATION_ENV: development
 
 volumes:
-  logs
+  logs:
     driver: local
   cache:
     driver: local
