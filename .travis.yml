@@ -26,6 +26,7 @@ script:
   - sleep 3
   - docker-compose -p phalcon ps
   - docker run -it --rm --net=phalcon_default -v $(pwd):/www klay/php-cli --ri phalcon
+  - curl -Ssi http://localhost:80| grep '200 OK'
 
 notifications:
   email:
