@@ -44,10 +44,16 @@ $ git clone git@github.com:sergeyklay/phalcon-compose.git
 ```
 
 Next, put your Phalcon Application into `application` folder.
-Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
+Add `phalcon.local` in your `/etc/hosts` file as follows:
 
 ```
-127.0.0.1	your_site_name.dev
+127.0.0.1	phalcon.local
+```
+
+Build the containers:
+
+```sh
+$ docker-compose build
 ```
 
 ## Usage
@@ -55,7 +61,8 @@ Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
 Now you are ready to build, create, start, and attach to containers for your application, run:
 
 ```sh
-docker-compose -p phalcon up -d
+# instead of phalcon you can use here your prefered project name
+$ docker-compose -p phalcon up -d
 ```
 
 and you can visit your Phalcon application on the following URL: http://your_site_name.dev
@@ -88,6 +95,7 @@ Here are the `docker-compose` services:
 This results in the following running containers:
 
 ```sh
+# instead of phalcon you can use here your prefered project name
 $ docker-compose -p phalcon ps
 
        Name                     Command               State                                               Ports
@@ -114,6 +122,7 @@ In additional you can use [`klay/php-cli`][3] container with pre-installed requi
 tests:
 
 ```sh
+# instead of phalcon_default you can use here your prefered <project name>_default
 docker run -it --rm --net=phalcon_default -v $(pwd):/www klay/php-cli vendor/bin/codecept run
 ```
 
