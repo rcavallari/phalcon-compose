@@ -32,7 +32,12 @@ To run this stack on your machine, you need at least:
 
 ### Installation
 
-First, clone this repository:
+First, get this project by using `composer create-project`:
+```sh
+$ composer create-project sergeyklay/phalcon-compose
+```
+
+Another way to fetch project by using `git clone`::
 
 ```sh
 $ git clone git@github.com:sergeyklay/phalcon-compose.git
@@ -56,7 +61,6 @@ docker-compose -p phalcon up -d
 and you can visit your Phalcon application on the following URL: http://your_site_name.dev
 
 **NOTE:**
-
 
 If your application uses a file cache or writes logs to a file on disk open application configuration and set up cache
 and log paths as shown below:
