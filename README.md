@@ -55,6 +55,15 @@ docker-compose -p phalcon up -d
 
 and you can visit your Phalcon application on the following URL: http://your_site_name.dev
 
+**NOTE:**
+
+
+If your application uses a file cache or writes logs to a file on disk open application configuration and set up cache
+and log paths as shown below:
+
+* `cache` - `/var/cache/phalcon`
+* `logs` - `/var/log/phalcon`
+
 ### Containers Included
 
 Here are the `docker-compose` services:
