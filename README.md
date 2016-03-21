@@ -1,6 +1,6 @@
 <img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-# Phalcon Docker Edition [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-2.1.x](https://img.shields.io/badge/phalcon-2.1.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/2.1.x)
+# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-2.1.x](https://img.shields.io/badge/phalcon-2.1.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/2.1.x)
 
 The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
 
@@ -32,17 +32,28 @@ To run this stack on your machine, you need at least:
 
 ### Installation
 
-First, clone this repository:
+First, get this project by using `composer create-project`:
+```sh
+$ composer create-project sergeyklay/phalcon-compose
+```
+
+Another way to fetch project by using `git clone`:
 
 ```sh
 $ git clone git@github.com:sergeyklay/phalcon-compose.git
 ```
 
 Next, put your Phalcon Application into `application` folder.
-Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
+Add `phalcon.local` in your `/etc/hosts` file as follows:
 
 ```
-127.0.0.1	your_site_name.dev
+127.0.0.1	phalcon.local
+```
+
+Build the containers:
+
+```sh
+$ docker-compose build
 ```
 
 ## Usage
@@ -50,13 +61,13 @@ Then add `your_site_name.dev` in your `/etc/hosts` file as follows:
 Now you are ready to build, create, start, and attach to containers for your application, run:
 
 ```sh
-docker-compose -p phalcon up -d
+# instead of phalcon you can use here your prefered project name
+$ docker-compose -p phalcon up -d
 ```
 
-and you can visit your Phalcon application on the following URL: http://your_site_name.dev
+and you can visit your Phalcon application on the following URL: [http://phalcon.local](http://phalcon.local)
 
 **NOTE:**
-
 
 If your application uses a file cache or writes logs to a file on disk open application configuration and set up cache
 and log paths as shown below:
@@ -64,7 +75,7 @@ and log paths as shown below:
 * `cache` - `/var/cache/phalcon`
 * `logs` - `/var/log/phalcon`
 
-### Containers Included
+## Containers Included
 
 Here are the `docker-compose` services:
 
@@ -84,6 +95,7 @@ Here are the `docker-compose` services:
 This results in the following running containers:
 
 ```sh
+# instead of phalcon you can use here your prefered project name
 $ docker-compose -p phalcon ps
 
        Name                     Command               State                                               Ports
@@ -100,18 +112,23 @@ phalcon_redis        /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379
 phalcon_volume       /bin/bash                        Up
 ```
 
-### Read logs
+## Read logs
 
 You can access logs by using `docker logs <container_name>` into your host machine.
 
-### PHP CLI
+## PHP CLI
 
 In additional you can use [`klay/php-cli`][3] container with pre-installed required extensions. For example to run
 tests:
 
 ```sh
+# instead of phalcon_default you can use here your prefered <project name>_default
 docker run -it --rm --net=phalcon_default -v $(pwd):/www klay/php-cli vendor/bin/codecept run
 ```
+
+## License
+
+Phalcon Compose is open source software licensed under the MIT. See the [docs/LICENSE.md](docs/LICENSE.md) file for more
 
 [0]: https://www.docker.com/
 [1]: https://docs.docker.com/installation/
