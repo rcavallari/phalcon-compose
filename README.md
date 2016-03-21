@@ -37,7 +37,7 @@ First, get this project by using `composer create-project`:
 $ composer create-project sergeyklay/phalcon-compose
 ```
 
-Another way to fetch project by using `git clone`::
+Another way to fetch project by using `git clone`:
 
 ```sh
 $ git clone git@github.com:sergeyklay/phalcon-compose.git
@@ -65,7 +65,7 @@ Now you are ready to build, create, start, and attach to containers for your app
 $ docker-compose -p phalcon up -d
 ```
 
-and you can visit your Phalcon application on the following URL: http://your_site_name.dev
+and you can visit your Phalcon application on the following URL: [http://phalcon.local](http://phalcon.local)
 
 **NOTE:**
 
