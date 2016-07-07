@@ -3,7 +3,7 @@ version: '2'
 services:
   application:
     build: containers/core
-    container_name: phalcon_volume
+    container_name: phalcon.compose.volume
     volumes:
       - ./application:/var/www/phalcon
       - ./cache:/var/cache/phalcon
@@ -13,7 +13,7 @@ services:
   mongo:
     restart: always
     image: mongo:3.2
-    container_name: phalcon_mongo
+    container_name: phalcon.compose.mongo
     expose:
       - "27017"
     ports:
@@ -24,7 +24,7 @@ services:
   postgres:
     restart: always
     image: postgres:9.5
-    container_name: phalcon_postgres
+    container_name: phalcon.compose.postgres
     expose:
       - "5432"
     ports:
@@ -38,7 +38,7 @@ services:
   mysql:
     restart: always
     image: mysql:5.7
-    container_name: phalcon_mysql
+    container_name: phalcon.compose.mysql
     expose:
       - "3306"
     ports:
@@ -54,14 +54,14 @@ services:
   memcached:
     restart: always
     image: memcached:1.4
-    container_name: phalcon_memcached
+    container_name: phalcon.compose.memcached
     ports:
       - "11211:11211"
 
   queue:
     restart: always
-    image: klay/beanstalkd
-    container_name: phalcon_beanstalkd
+    image: phalconphp/beanstalkd:1.10
+    container_name: phalcon.compose.beanstalkd
     ports:
       - "11300:11300"
     volumes:
@@ -70,7 +70,7 @@ services:
   aerospike:
     restart: always
     image: aerospike/aerospike-server
-    container_name: phalcon_aerospike
+    container_name: phalcon.compose.aerospike
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -80,16 +80,16 @@ services:
   redis:
     restart: always
     image: redis:latest
-    container_name: phalcon_redis
+    container_name: phalcon.compose.redis
     ports:
       - "6379:6379"
     volumes:
       - redis:/data
 
   php:
-    image: klay/php-fpm
+    image: phalconphp/php-fpm:5.6
     restart: always
-    container_name: phalcon_php
+    container_name: phalcon.compose.php
     expose:
       - "9000"
       - "10000"
@@ -106,8 +106,8 @@ services:
 
   nginx:
     restart: always
-    image: klay/nginx
-    container_name: phalcon_nginx
+    image: phalconphp/nginx:latest
+    container_name: phalcon.compose.nginx
     expose:
       - "80"
       - "443"

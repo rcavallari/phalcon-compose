@@ -3,6 +3,8 @@ dist: trusty
 
 env:
   - DOCKER_COMPOSE_VERSION="1.6.2"
+  - DOCKER_COMPOSE_VERSION="1.7.0"
+  - DOCKER_COMPOSE_VERSION="1.7.1"
 
 cache:
   - apt
@@ -18,15 +20,14 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - stty cols 160
 
 script:
   - docker-compose version
-  - docker-compose -p phalcon up -d
+  - docker-compose -p phalconcompose up -d
   - sleep 3
-  - docker-compose -p phalcon ps
+  - docker-compose -p phalconcompose ps
   - docker volume ls
-  - docker run -it --rm --net=phalcon_default -v $(pwd):/www klay/php-cli --ri phalcon
+  - docker run -it --rm phalconphp/php:5.6 --ri phalcon
   - curl -Ssi http://localhost:80 | grep '200 OK'
 
 notifications:
