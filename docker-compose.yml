@@ -90,6 +90,7 @@ services:
     image: phalconphp/php-fpm:5.6
     restart: always
     container_name: phalcon.compose.php
+    working_dir: /var/www/phalcon
     expose:
       - "9000"
       - "10000"
