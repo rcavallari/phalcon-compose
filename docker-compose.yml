@@ -87,7 +87,7 @@ services:
       - redis:/data
 
   php:
-    image: phalconphp/php-fpm:5.6
+    image: phalconphp/php-fpm:7.0
     restart: always
     container_name: phalcon.compose.php
     working_dir: /var/www/phalcon
