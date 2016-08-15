@@ -1,6 +1,6 @@
 <img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-2.1.x](https://img.shields.io/badge/phalcon-2.1.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/2.1.x)
+# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-3.0.x](https://img.shields.io/badge/phalcon-3.0.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/3.0.x)
 
 The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
 
