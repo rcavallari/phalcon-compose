@@ -1,6 +1,6 @@
 <img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-3.0.x](https://img.shields.io/badge/phalcon-3.0.x-blue.svg)](https://github.com/phalcon/cphalcon/tree/3.0.x)
+# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-3.0.1](https://img.shields.io/badge/phalcon-3.0.1-blue.svg)](https://github.com/phalcon/cphalcon)
 
 The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
 
@@ -11,7 +11,7 @@ The main tools used are Phalcon, Docker and Docker Compose. Other things include
 - Nginx 1.10.0
 - MySQL 5.7.12
 - Memcached 1.4
-- PHP-FPM 5.6.23
+- PHP-FPM 7.0.10
 - Xdebug 2.4.0
 - Opcache 7.0.6-dev
 - Beanstalk 1.10
