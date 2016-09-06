@@ -1,8 +1,10 @@
 <img align="right" width="175px" src="http://i.imgur.com/mdZ8Ktf.png" />
 
-# Phalcon Compose [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose) [![phalcon-3.0.1](https://img.shields.io/badge/phalcon-3.0.1-blue.svg)](https://github.com/phalcon/cphalcon)
+# Phalcon Compose
+[![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)][:bs:]
+[![phalcon-3.0.1](https://img.shields.io/badge/phalcon-3.0.1-blue.svg)][:phalcon:]
 
-The *unofficial* Phalcon Docker Edition – by [@sergeyklay](https://github.com/sergeyklay)
+The *unofficial* Phalcon Docker Edition – by [@sergeyklay][:me:]
 
 This is an unofficial, open-source and community-driven boilerplate for Phalcon projects that run on [Docker][0].
 It's an attempt of standardizing and making it easier to bootstrap Phalcon applications ready for development and production environments.
@@ -10,13 +12,13 @@ The main tools used are Phalcon, Docker and Docker Compose. Other things include
 
 - Nginx 1.10.0
 - MySQL 5.7.12
-- Memcached 1.4
+- Memcached 1.4.25
 - PHP-FPM 7.0.10
-- Xdebug 2.4.0
-- Opcache 7.0.6-dev
+- Xdebug 2.4.1
+- Opcache 7.0.10
 - Beanstalk 1.10
 - Redis 3.2.0
-- Aerospike 3.7.4
+- Aerospike 3.9.1
 - Mongo 3.2.7
 - PostgreSQL 9.5.3
 
@@ -61,11 +63,11 @@ $ docker-compose build
 Now you are ready to build, create, start, and attach to containers for your application, run:
 
 ```sh
-# instead of phalcon you can use here your prefered project name
-$ docker-compose -p phalconcompose up -d
+# instead of "my-app" you can use here your prefered project name
+$ docker-compose -p my-app up -d
 ```
 
-and you can visit your Phalcon application on the following URL: [http://phalcon.local](http://phalcon.local)
+and you can visit your Phalcon application on the following URL: http://phalcon.local
 
 **NOTE:**
 
@@ -90,15 +92,16 @@ Here are the `docker-compose` services:
  aerospike           Aerospike server container
  posgres             PostgreSQL server container
  mongo               MongoDB server container
+ ssh                 SSH acces to the PHP-FPM container
 ```
 
 This results in the following running containers:
 
 ```sh
 # instead of phalcon you can use here your prefered project name
-$ docker-compose -p phalconcompose ps
+$ docker-compose -p my-app ps
 
-       Name                     Command               State                                               Ports
+           Name                         Command               State                                               Ports
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 phalcon.compose.aerospike    /entrypoint.sh asd               Up      0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:3002->3002/tcp, 0.0.0.0:3003->3003/tcp
 phalcon.compose.beanstalkd   beanstalkd -p 11300 -b /data     Up      0.0.0.0:11300->11300/tcp
@@ -106,10 +109,11 @@ phalcon.compose.memcached    /entrypoint.sh memcached         Up      0.0.0.0:11
 phalcon.compose.mongo        /entrypoint.sh mongod            Up      0.0.0.0:27017->27017/tcp
 phalcon.compose.mysql        docker-entrypoint.sh mysqld      Up      0.0.0.0:3306->3306/tcp
 phalcon.compose.nginx        nginx -g daemon off;             Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
-phalcon.compose.php          php-fpm5.6 -F                    Up      0.0.0.0:10000->10000/tcp, 0.0.0.0:9000->9000/tcp
+phalcon.compose.php          php-fpm7.0 -F                    Up      0.0.0.0:9000->9000/tcp, 0.0.0.0:9001->9001/tcp
 phalcon.compose.postgres     /docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/tcp
 phalcon.compose.redis        docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp
-phalcon.compose.volume       sh                               Up                       Up
+phalcon.compose.ssh          npm start                        Up      0.0.0.0:2222->22/tcp, 0.0.0.0:8022->8022/tcp
+phalcon.compose.volume       sh                               Up
 ```
 
 ## Read logs
@@ -123,13 +127,16 @@ tests:
 
 ```sh
 # instead of phalcon_default you can use here your prefered <project name>_default
-docker run -it --rm --net=phalcon_default -v $(pwd):/app phalconphp/php:5.6 vendor/bin/codecept run
+docker run -it --rm --net=myapp_default -v $(pwd):/app phalconphp/php:5.6 vendor/bin/codecept run
 ```
 
 ## License
 
 Phalcon Compose is open source software licensed under the MIT. See the [docs/LICENSE.md](docs/LICENSE.md) file for more
 
+[:bs:]: https://travis-ci.org/sergeyklay/phalcon-compose
+[:phalcon:]: https://github.com/phalcon/cphalcon
+[:me:]: https://github.com/sergeyklay
 [0]: https://www.docker.com/
 [1]: https://docs.docker.com/installation/
 [2]: https://docs.docker.com/compose/install/
