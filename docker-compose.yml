@@ -98,12 +98,9 @@ services:
     restart: always
     container_name: phalcon.compose.php
     working_dir: /var/www/phalcon
-    expose:
-      - "9000"
-      - "10000"
     ports:
       - "9000:9000"
-      - "10000:10000"
+      - "9001:9001"
     volumes_from:
       - application
     depends_on:
@@ -112,9 +109,24 @@ services:
       - redis
       - memcached
 
+  ssh:
+    image: jeroenpeeters/docker-ssh
+    restart: always
+    container_name: phalcon.compose.ssh
+    depends_on:
+      - php
+    ports:
+      - "2222:22"
+      - "8022:8022"
+    environment:
+      CONTAINER: phalcon.compose.php
+      AUTH_MECHANISM: noAuth
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
   nginx:
     restart: always
-    image: phalconphp/nginx:latest
+    image: phalconphp/nginx:1.10
     container_name: phalcon.compose.nginx
     expose:
       - "80"

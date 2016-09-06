@@ -1,11 +1,19 @@
+language: php
+
 sudo: required
 dist: trusty
+
+php:
+  - 7.0
 
 env:
   - DOCKER_COMPOSE_VERSION="1.6.2"
   - DOCKER_COMPOSE_VERSION="1.7.0"
   - DOCKER_COMPOSE_VERSION="1.7.1"
   - DOCKER_COMPOSE_VERSION="1.8.0"
+
+git:
+  depth: 1
 
 cache:
   - apt
@@ -21,19 +29,24 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - docker pull phalconphp/php:$TRAVIS_PHP_VERSION
+
+before_script:
+  - stty cols 160
+  - docker-compose version
+  - docker-compose build
 
 script:
-  - docker-compose version
   - docker-compose -p phalconcompose up -d
   - sleep 3
   - docker-compose -p phalconcompose ps
   - docker volume ls
-  - docker run -it --rm phalconphp/php:5.6 --ri phalcon
-  - curl -Ssi http://localhost:80 | grep '200 OK'
+  - docker run -it --rm phalconphp/php:$TRAVIS_PHP_VERSION --ri phalcon | grep "Version => " || exit 1
+  - curl -sI http://localhost:80 | grep '200 OK' || exit 1
 
 notifications:
   email:
     recipients:
-      - serghei@phalconphp.com
+      - build@phalconphp.com
     on_success: change
     on_failure: always
