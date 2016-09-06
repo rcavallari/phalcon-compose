@@ -98,12 +98,9 @@ services:
     restart: always
     container_name: phalcon.compose.php
     working_dir: /var/www/phalcon
-    expose:
-      - "9000"
-      - "10000"
     ports:
       - "9000:9000"
-      - "10000:10000"
+      - "9001:9001"
     volumes_from:
       - application
     depends_on:
