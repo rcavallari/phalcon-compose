@@ -1,2 +1,13 @@
+# Mac
 .DS_Store
+
+# IDEA
 .idea
+
+# Phalcon Developer Tools
+application/.phalcon/devtools.log
+application/.phalcon/migration-version
+
+# Composer
+composer.lock
+composer.phar

@@ -126,7 +126,7 @@ In additional you can use [`phalconphp/php`][3] container with pre-installed req
 tests:
 
 ```sh
-# instead of phalcon_default you can use here your prefered <project name>_default
+# instead of myapp_default you can use here your prefered <project name>_default
 docker run -it --rm --net=myapp_default -v $(pwd):/app phalconphp/php:5.6 vendor/bin/codecept run
 ```
 
