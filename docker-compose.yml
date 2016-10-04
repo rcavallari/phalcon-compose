@@ -5,9 +5,9 @@ services:
     build: containers/core
     container_name: phalcon.compose.volume
     volumes:
-      - ./application:/var/www/phalcon
-      - ./cache:/var/cache/phalcon
-      - ./logs:/var/log/phalcon
+      - ./application:/project
+      - ./cache:/project/cache
+      - ./logs:/project/logs
     tty: true
 
   mongo:
@@ -31,9 +31,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: ''
-      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file:
+      - variables.env
 
   mysql:
     restart: always
@@ -45,11 +44,8 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: phalcondb
-      MYSQL_USER: phalcon
-      MYSQL_PASSWORD: secret
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    env_file:
+          - variables.env
 
   memcached:
     restart: always
@@ -94,13 +90,14 @@ services:
       - redis:/data
 
   php:
-    image: phalconphp/php-fpm:7.0
+    image: phalconphp/php-apache:ubuntu-16.04
     restart: always
     container_name: phalcon.compose.php
-    working_dir: /var/www/phalcon
+    working_dir: /project
     ports:
+      - "80:80"
+      - "443:443"
       - "9000:9000"
-      - "9001:9001"
     volumes_from:
       - application
     depends_on:
@@ -108,6 +105,8 @@ services:
       - queue
       - redis
       - memcached
+    env_file:
+      - variables.env
 
   ssh:
     image: jeroenpeeters/docker-ssh
@@ -118,33 +117,10 @@ services:
     ports:
       - "2222:22"
       - "8022:8022"
-    environment:
-      CONTAINER: phalcon.compose.php
-      AUTH_MECHANISM: noAuth
+    env_file:
+          - variables.env
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-
-  nginx:
-    restart: always
-    image: phalconphp/nginx:1.10
-    container_name: phalcon.compose.nginx
-    expose:
-      - "80"
-      - "443"
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-        - php
-    volumes:
-      - ./conf/nginx/certs:/etc/nginx/certs
-      - ./conf/nginx/conf.d:/etc/nginx/conf.d
-      - ./conf/nginx/vhost:/etc/nginx/sites-enabled
-    volumes_from:
-      - application
-    environment:
-      # production | development | staging | testing
-      APPLICATION_ENV: development
 
 volumes:
   mongo:

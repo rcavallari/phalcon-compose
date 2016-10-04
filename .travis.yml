@@ -33,6 +33,7 @@ before_install:
 
 before_script:
   - stty cols 160
+  - cp variables.env.example variables.env
   - docker-compose version
   - docker-compose build
 
