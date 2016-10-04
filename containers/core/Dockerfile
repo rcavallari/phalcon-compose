@@ -1,5 +1,5 @@
 #
-# Palcon Applcition Core
+# Applcition Core Container
 #
 
 # Pull base image

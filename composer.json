@@ -14,5 +14,10 @@
   "support": {
     "source": "https://github.com/sergeyklay/phalcon-compose",
     "issues": "https://github.com/sergeyklay/phalcon-compose/issues"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('variables.env.example', 'variables.env');\""
+    ]
   }
 }

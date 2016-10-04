@@ -11,3 +11,5 @@ application/.phalcon/migration-version
 # Composer
 composer.lock
 composer.phar
+
+variables.env
