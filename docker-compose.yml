@@ -78,6 +78,7 @@ services:
       - "3002:3002"
       - "3003:3003"
     volumes:
+        - aerospike:/opt/aerospike/data
         - ./conf/aerospike/aerospike.conf:/etc/aerospike/aerospike.conf
 
   redis:
@@ -132,4 +133,6 @@ volumes:
   beanstalk:
     driver: local
   redis:
+    driver: local
+  aerospike:
     driver: local
