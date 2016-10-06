@@ -86,16 +86,9 @@ services:
     restart: always
     container_name: phalcon.compose.php
     working_dir: /project
-    expose:
-      - "80"
-      - "443"
-      - "9000"
-      - "9001"
     ports:
       - "80:80"
       - "443:443"
-      - "9000:9000"
-      - "9001:9001"
     volumes:
       - ./application:/project
       - ./cache:/project/cache
