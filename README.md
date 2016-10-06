@@ -92,7 +92,6 @@ For information about the environment variables refer to: [Environment variables
 Here are the `docker-compose` services:
 
 ```
- application         Phalcon application code container
  mongo               MongoDB server container
  posgres             PostgreSQL server container
  mysql               MySQL database container
@@ -121,7 +120,6 @@ phalcon.compose.php          /opt/docker/bin/entrypoint ...   Up      0.0.0.0:44
 phalcon.compose.postgres     /docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/tcp
 phalcon.compose.redis        docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp
 phalcon.compose.ssh          npm start                        Up      0.0.0.0:2222->22/tcp, 0.0.0.0:8022->8022/tcp
-phalcon.compose.volume       sh                               Up
 ```
 
 ## Read logs
