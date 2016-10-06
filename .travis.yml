@@ -45,7 +45,6 @@ script:
   - docker volume ls
   - docker run -it --rm phalconphp/php:$TRAVIS_PHP_VERSION --ri phalcon | grep "Version => " || exit 1
   - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
-  - curl -sI http://localhost:80 | grep 'XDEBUG_SESSION=PHPSTORM' || exit 1
 
 notifications:
   email:
