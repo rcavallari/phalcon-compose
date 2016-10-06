@@ -66,7 +66,7 @@ $ docker-compose build
 Now you are ready to build, create, start, and attach to containers for your application, run:
 
 ```sh
-# instead of "my-app" you can use here your prefered project name
+# You can use here your prefered project name instead of "my-app"
 $ docker-compose -p my-app up -d
 ```
 
@@ -106,7 +106,7 @@ Here are the `docker-compose` services:
 This results in the following running containers:
 
 ```sh
-# instead of phalcon you can use here your prefered project name
+# You can use here your prefered project name instead of "my-app"
 $ docker-compose -p my-app ps
 
            Name                         Command               State                                               Ports
