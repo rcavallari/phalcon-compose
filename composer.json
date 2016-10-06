@@ -1,14 +1,18 @@
 {
   "name": "sergeyklay/phalcon-compose",
   "description": "Open-source and community-driven boilerplate for Phalcon projects by using Docker and Docker Compose",
-  "keywords": ["phalcon", "docker", "compose", "boilerplate"],
+  "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
   "license": "MIT",
   "type": "project",
-  "homepage": "https://github.com/sergeyklay/phalcon-compose",
+  "homepage": "https://phalcon-compose.readme.io",
   "authors": [
     {
       "name": "Serghei Iakovlev",
       "email": "serghei@phalconphp.com"
+    },
+    {
+      "name": "Contributors",
+      "homepage": "https://github.com/sergeyklay/phalcon-compose/graphs/contributors"
     }
   ],
   "support": {
