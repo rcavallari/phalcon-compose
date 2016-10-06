@@ -50,6 +50,6 @@ script:
 notifications:
   email:
     recipients:
-      - build@phalconphp.com
+      - serghei@phalconphp.com
     on_success: change
     on_failure: always
