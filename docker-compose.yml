@@ -1,15 +1,6 @@
 version: '2'
 
 services:
-  application:
-    build: containers/core
-    container_name: phalcon.compose.volume
-    volumes:
-      - ./application:/project
-      - ./cache:/project/cache
-      - ./logs:/project/logs
-    tty: true
-
   mongo:
     restart: always
     image: mongo:3.2
@@ -99,8 +90,10 @@ services:
       - "80:80"
       - "443:443"
       - "9000:9000"
-    volumes_from:
-      - application
+    volumes:
+      - ./application:/project
+      - ./cache:/project/cache
+      - ./logs:/project/logs
     depends_on:
       - mysql
       - queue
