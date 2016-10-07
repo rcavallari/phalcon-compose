@@ -4,7 +4,7 @@
   "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
   "license": "MIT",
   "type": "project",
-  "homepage": "https://phalcon-compose.readme.io",
+  "homepage": "https://phalcon-compose.readme.io/",
   "authors": [
     {
       "name": "Serghei Iakovlev",
@@ -17,7 +17,8 @@
   ],
   "support": {
     "source": "https://github.com/sergeyklay/phalcon-compose",
-    "issues": "https://github.com/sergeyklay/phalcon-compose/issues"
+    "issues": "https://github.com/sergeyklay/phalcon-compose/issues",
+    "docs": "https://phalcon-compose.readme.io/"
   },
   "scripts": {
     "post-root-package-install": [
