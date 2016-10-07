@@ -3,9 +3,6 @@ language: php
 sudo: required
 dist: trusty
 
-php:
-  - 7.0
-
 env:
   - DOCKER_COMPOSE_VERSION="1.6.2"
   - DOCKER_COMPOSE_VERSION="1.7.0"
@@ -30,7 +27,7 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - docker pull phalconphp/php:$TRAVIS_PHP_VERSION
+  - docker pull phalconphp/php-apache:ubuntu-16.04
 
 before_script:
   - stty cols 160
@@ -43,7 +40,7 @@ script:
   - sleep 3
   - docker-compose -p phalconcompose ps
   - docker volume ls
-  - docker run -it --rm phalconphp/php:$TRAVIS_PHP_VERSION --ri phalcon | grep "Version => " || exit 1
+  - docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php --ri phalcon" | grep "Version => " || exit 1
   - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
 
 notifications:
