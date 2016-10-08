@@ -36,7 +36,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     env_file:
-          - variables.env
+        - variables.env
 
   memcached:
     restart: always
@@ -56,7 +56,7 @@ services:
 
   aerospike:
     restart: always
-    image: aerospike
+    image: aerospike:latest
     container_name: phalcon.compose.aerospike
     expose:
       - "3000"
@@ -69,8 +69,8 @@ services:
       - "3002:3002"
       - "3003:3003"
     volumes:
-        - aerospike:/opt/aerospike/data
-        - ./conf/aerospike/aerospike.conf:/etc/aerospike/aerospike.conf
+      - aerospike:/opt/aerospike/data
+      - ./conf/aerospike/aerospike.conf:/etc/aerospike/aerospike.conf
 
   redis:
     restart: always
@@ -80,6 +80,21 @@ services:
       - "6379:6379"
     volumes:
       - redis:/data
+
+  elasticsearch:
+    image: elasticsearch:2.3
+    restart: always
+    container_name: phalcon.compose.elasticsearch
+    expose:
+      - "9200"
+      - "9300"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    env_file:
+      - variables.env
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
 
   php:
     image: phalconphp/php-apache:ubuntu-16.04
@@ -98,11 +113,12 @@ services:
       - queue
       - redis
       - memcached
+      - elasticsearch
     env_file:
       - variables.env
 
   ssh:
-    image: jeroenpeeters/docker-ssh
+    image: jeroenpeeters/docker-ssh:latest
     restart: always
     container_name: phalcon.compose.ssh
     depends_on:
@@ -111,7 +127,7 @@ services:
       - "2222:22"
       - "8022:8022"
     env_file:
-          - variables.env
+      - variables.env
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
 
@@ -127,4 +143,6 @@ volumes:
   redis:
     driver: local
   aerospike:
+    driver: local
+  esdata:
     driver: local
