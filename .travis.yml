@@ -27,20 +27,18 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - docker pull phalconphp/php-apache:ubuntu-16.04
+  - make update
 
 before_script:
   - stty cols 160
-  - cp variables.env.example variables.env
-  - docker-compose version
-  - docker-compose build
+  - make create
 
 script:
-  - docker-compose -p phalconcompose up -d
-  - sleep 3
-  - docker-compose -p phalconcompose ps
+  - make check
+  - make status
+  - make version
   - docker volume ls
-  - docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php --ri phalcon" | grep "Version => " || exit 1
+  - make version || exit 1
   - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
 
 notifications:
