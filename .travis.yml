@@ -27,21 +27,22 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - make update
-
-before_script:
   - stty cols 160
   - cp variables.env.example variables.env
-  - make update
+
+install:
+  - make pull
+
+before_script:
   - make build
 
 script:
   - make check
   - make status
-  - make version
   - docker volume ls
   - make version || exit 1
   - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
+  - make clean
 
 notifications:
   email:
