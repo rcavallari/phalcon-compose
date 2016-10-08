@@ -1,28 +1,33 @@
 {
-  "name": "sergeyklay/phalcon-compose",
-  "description": "Open-source and community-driven boilerplate for Phalcon projects by using Docker and Docker Compose",
-  "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
-  "license": "MIT",
-  "type": "project",
-  "homepage": "https://phalcon-compose.readme.io/",
-  "authors": [
-    {
-      "name": "Serghei Iakovlev",
-      "email": "serghei@phalconphp.com"
+    "name": "sergeyklay/phalcon-compose",
+    "description": "Open-source and community-driven boilerplate for Phalcon projects by using Docker and Docker Compose",
+    "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
+    "license": "MIT",
+    "type": "project",
+    "homepage": "https://phalcon-compose.readme.io/",
+    "authors": [
+        {
+            "name": "Serghei Iakovlev",
+            "email": "serghei@phalconphp.com"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/sergeyklay/phalcon-compose/graphs/contributors"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/sergeyklay/phalcon-compose",
+        "issues": "https://github.com/sergeyklay/phalcon-compose/issues",
+        "docs": "https://phalcon-compose.readme.io/"
     },
-    {
-      "name": "Contributors",
-      "homepage": "https://github.com/sergeyklay/phalcon-compose/graphs/contributors"
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('variables.env.example', 'variables.env');\""
+        ]
+    },
+    "extra": {
+        "phalcon-project-path": "/project",
+        "phalcon-cache-path": "/project/cache",
+        "phalcon-logs-path": "/project/logs"
     }
-  ],
-  "support": {
-    "source": "https://github.com/sergeyklay/phalcon-compose",
-    "issues": "https://github.com/sergeyklay/phalcon-compose/issues",
-    "docs": "https://phalcon-compose.readme.io/"
-  },
-  "scripts": {
-    "post-root-package-install": [
-      "php -r \"copy('variables.env.example', 'variables.env');\""
-    ]
-  }
 }
