@@ -6,7 +6,16 @@ build: check
 	docker-compose build --no-cache
 	docker-compose up -d
 
-update:
+pull:
+	docker pull mongo:3.2
+	docker pull postgres:9.5
+	docker pull mysql:5.7
+	docker pull memcached:1.4
+	docker pull aerospike:latest
+	docker pull redis:latest
+	docker pull elasticsearch:2.3
+	docker pull jeroenpeeters/docker-ssh:latest
+	docker pull phalconphp/beanstalkd:1.10
 	docker pull phalconphp/php-apache:ubuntu-16.04
 
 up: check
@@ -36,6 +45,9 @@ endif
 version:
 	$(info Phalcon $(PHALCON_VERSION))
 	docker-compose version
+
+clean: stop
+	docker-compose rm -f
 
 %:
 	@:
