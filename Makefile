@@ -2,9 +2,9 @@ ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 VARIABLES_FILE=$(ROOT_DIR)/variables.env
 PHALCON_VERSION=$(shell docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php -r 'echo Phalcon\Version::get();'")
 
-create:
+build: check
 	docker-compose build --no-cache
-	cp $(VARIABLES_FILE).example $(VARIABLES_FILE)
+	docker-compose up -d
 
 update:
 	docker pull phalconphp/php-apache:ubuntu-16.04
