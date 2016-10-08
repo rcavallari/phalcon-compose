@@ -58,11 +58,6 @@ services:
     restart: always
     image: aerospike:latest
     container_name: phalcon.compose.aerospike
-    expose:
-      - "3000"
-      - "3001"
-      - "3002"
-      - "3003"
     ports:
       - "3000:3000"
       - "3001:3001"
