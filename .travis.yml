@@ -35,6 +35,7 @@ install:
 
 before_script:
   - make build
+  - sleep 1
 
 script:
   - make check
