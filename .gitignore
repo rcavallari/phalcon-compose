@@ -1,11 +1,11 @@
 # Mac
 .DS_Store
 
-# IDEA
+# IDE
 .idea
+nbproject
 
 # Phalcon Developer Tools
-application/.phalcon/devtools.log
 application/.phalcon/migration-version
 
 # Composer
