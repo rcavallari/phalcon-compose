@@ -12,7 +12,7 @@ default: help-default;   # default target
 Makefile: ;              # skip prerequisite discovery
 
 .title:
-	$(info Phalcon Compose Builder: $(VERSION))
+	$(info Phalcon Compose: $(VERSION))
 	$(info )
 
 help-default help: .title
