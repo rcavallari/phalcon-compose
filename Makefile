@@ -2,7 +2,8 @@ ROOT_DIR       := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 VARIABLES_FILE  = $(ROOT_DIR)/variables.env
 PHALCON_VERSION = $(shell docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php -r 'echo Phalcon\Version::get();'")
 SHELL          := $(shell which bash)
-VERSION         = 2.0.2
+VERSION         = 2.0.3
+ARGS            = $(filter-out $@,$(MAKECMDGOALS))
 
 .SILENT: ;               # no need for @
 .ONESHELL: ;             # recipes execute in same shell
@@ -29,9 +30,12 @@ help-default help: .title
 	@echo "                      up: Create and start application in detached mode (in the background)"
 	@echo "                    pull: Pull latest dependencies"
 	@echo "                    stop: Stop application"
+	@echo "                   root:  Login to the 'app' container as 'application' user"
+	@echo "                   shell: Login to the 'app' container as 'root' user"
 	@echo "                   start: Start application"
 	@echo "                   build: Build or rebuild services"
 	@echo "                   reset: Reset all containers, delete all data, rebuild services and restart"
+	@echo "                 php-cli: Run PHP interactively (CLI)"
 	@echo ""
 
 build: check
@@ -75,8 +79,19 @@ version:
 	$(info Phalcon $(PHALCON_VERSION))
 	docker-compose version
 
+php-cli:
+	docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php -a"
+
+bash: shell
+
+shell:
+	docker exec -it -u application $$(docker-compose ps -q app) /bin/bash
+
+root:
+	docker exec -it -u root $$(docker-compose ps -q app) /bin/bash
+
 clean: stop
-	docker-compose rm --force
+	docker-compose rm --force app
 
 %:
 	@:
