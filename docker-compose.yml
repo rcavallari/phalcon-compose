@@ -34,6 +34,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - ./data/mysql:/docker-entrypoint-initdb.d
       - mysql:/var/lib/mysql
     env_file:
         - variables.env
@@ -92,7 +93,7 @@ services:
       - esdata:/usr/share/elasticsearch/data
 
   php:
-    image: phalconphp/php-apache:ubuntu-16.04
+    build: docker/app
     restart: always
     container_name: phalcon.compose.php
     working_dir: /project
