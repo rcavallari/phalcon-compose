@@ -4,7 +4,6 @@ services:
   mongo:
     restart: always
     image: mongo:3.2
-    container_name: phalcon.compose.mongo
     expose:
       - "27017"
     ports:
@@ -15,7 +14,6 @@ services:
   postgres:
     restart: always
     image: postgres:9.5
-    container_name: phalcon.compose.postgres
     expose:
       - "5432"
     ports:
@@ -28,12 +26,12 @@ services:
   mysql:
     restart: always
     image: mysql:5.7
-    container_name: phalcon.compose.mysql
     expose:
       - "3306"
     ports:
       - "3306:3306"
     volumes:
+      - ./data/mysql:/docker-entrypoint-initdb.d
       - mysql:/var/lib/mysql
     env_file:
         - variables.env
@@ -41,14 +39,12 @@ services:
   memcached:
     restart: always
     image: memcached:1.4
-    container_name: phalcon.compose.memcached
     ports:
       - "11211:11211"
 
   queue:
     restart: always
     image: phalconphp/beanstalkd:1.10
-    container_name: phalcon.compose.beanstalkd
     ports:
       - "11300:11300"
     volumes:
@@ -57,7 +53,6 @@ services:
   aerospike:
     restart: always
     image: aerospike:latest
-    container_name: phalcon.compose.aerospike
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -70,7 +65,6 @@ services:
   redis:
     restart: always
     image: redis:latest
-    container_name: phalcon.compose.redis
     ports:
       - "6379:6379"
     volumes:
@@ -79,7 +73,6 @@ services:
   elasticsearch:
     image: elasticsearch:2.3
     restart: always
-    container_name: phalcon.compose.elasticsearch
     expose:
       - "9200"
       - "9300"
@@ -91,10 +84,9 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data
 
-  php:
-    image: phalconphp/php-apache:ubuntu-16.04
+  app:
+    build: docker/app
     restart: always
-    container_name: phalcon.compose.php
     working_dir: /project
     ports:
       - "80:80"
@@ -111,20 +103,6 @@ services:
       - elasticsearch
     env_file:
       - variables.env
-
-  ssh:
-    image: jeroenpeeters/docker-ssh:latest
-    restart: always
-    container_name: phalcon.compose.ssh
-    depends_on:
-      - php
-    ports:
-      - "2222:22"
-      - "8022:8022"
-    env_file:
-      - variables.env
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
 
 volumes:
   mongo:
