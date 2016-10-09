@@ -2,7 +2,7 @@
 
 # Phalcon Compose
 
-[![Version 2.0.1](https://img.shields.io/badge/version-v2.0.1-green.svg)](https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.0.1)
+[![Version 2.0.2](https://img.shields.io/badge/version-v2.0.2-green.svg)](https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.0.2)
 [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)](https://travis-ci.org/sergeyklay/phalcon-compose)
 [![Phalcon v3.0.1](https://img.shields.io/badge/phalcon-3.0.1-blue.svg)](https://github.com/phalcon/cphalcon)
 [![Downloads](https://img.shields.io/packagist/dt/sergeyklay/phalcon-compose.svg)](https://packagist.org/packages/sergeyklay/phalcon-compose)
