@@ -113,20 +113,6 @@ services:
     env_file:
       - variables.env
 
-  ssh:
-    image: jeroenpeeters/docker-ssh:latest
-    restart: always
-    container_name: phalcon.compose.ssh
-    depends_on:
-      - php
-    ports:
-      - "2222:22"
-      - "8022:8022"
-    env_file:
-      - variables.env
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-
 volumes:
   mongo:
     driver: local
