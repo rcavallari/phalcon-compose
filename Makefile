@@ -12,15 +12,15 @@ default: help-default;   # default target
 Makefile: ;              # skip prerequisite discovery
 
 .title:
-	@echo -e "Phalcon Composer Builder: $(VERSION)\n"
+	@echo -e "Phalcon Compose Builder: $(VERSION)\n"
 
 help-default help: .title
 	@echo "                          ====================================================================="
 	@echo "                          Help & Check Menu"
 	@echo "                          ====================================================================="
-	@echo "                    help: Show Phalcon Composer Help Menu: type: make help"
+	@echo "                    help: Show Phalcon Compose Help Menu: type: make help"
 	@echo "                   check: Check required files"
-	@echo "                 version: Check required files"
+	@echo "                 version: Show versions"
 	@echo "                          ====================================================================="
 	@echo "                          Main Menu"
 	@echo "                          ====================================================================="
@@ -30,7 +30,7 @@ help-default help: .title
 	@echo "                   start: Start application"
 	@echo "                    stop: Stop application"
 	@echo "                  status: List containers status"
-	@echo "                  reset:  Reset all containers, delete all data, rebuild services and restart"
+	@echo "                   reset: Reset all containers, delete all data, rebuild services and restart"
 	@echo ""
 
 build: check
@@ -70,7 +70,7 @@ endif
 	docker-compose config -q
 
 version:
-	$(info Phalcon Composer $(VERSION))
+	$(info Phalcon Compose $(VERSION))
 	$(info Phalcon $(PHALCON_VERSION))
 	docker-compose version
 
