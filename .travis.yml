@@ -41,16 +41,20 @@ before_script:
 
 script:
   - make up
+  - sleep 1
   - make status
   - make stop
   - make status
   - make start
   - make status
   - docker volume ls
-  - make version || exit 1
-  - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
+  - make version
+  - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK'
   - make reset
   - make status
+
+after_failure:
+  - bash bin/logs.sh
 
 notifications:
   email:
