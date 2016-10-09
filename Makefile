@@ -12,7 +12,8 @@ default: help-default;   # default target
 Makefile: ;              # skip prerequisite discovery
 
 .title:
-	@echo -e "Phalcon Compose Builder: $(VERSION)\n"
+	$(info Phalcon Compose Builder: $(VERSION))
+	$(info )
 
 help-default help: .title
 	@echo "                          ====================================================================="
@@ -20,16 +21,16 @@ help-default help: .title
 	@echo "                          ====================================================================="
 	@echo "                    help: Show Phalcon Compose Help Menu: type: make help"
 	@echo "                   check: Check required files"
+	@echo "                  status: List containers status"
 	@echo "                 version: Show versions"
 	@echo "                          ====================================================================="
 	@echo "                          Main Menu"
 	@echo "                          ====================================================================="
-	@echo "                   build: Build or rebuild services"
-	@echo "                    pull: Pull latest dependencies"
 	@echo "                      up: Create and start application in detached mode (in the background)"
-	@echo "                   start: Start application"
+	@echo "                    pull: Pull latest dependencies"
 	@echo "                    stop: Stop application"
-	@echo "                  status: List containers status"
+	@echo "                   start: Start application"
+	@echo "                   build: Build or rebuild services"
 	@echo "                   reset: Reset all containers, delete all data, rebuild services and restart"
 	@echo ""
 
