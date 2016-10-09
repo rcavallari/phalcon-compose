@@ -31,14 +31,16 @@ before_install:
   - cp variables.env.example variables.env
 
 install:
+  - make help
   - make pull
 
 before_script:
   - make build
+  - make check
   - sleep 1
 
 script:
-  - make check
+  - make start
   - make status
   - docker volume ls
   - make version || exit 1

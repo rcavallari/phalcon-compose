@@ -1,10 +1,40 @@
-ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-VARIABLES_FILE=$(ROOT_DIR)/variables.env
-PHALCON_VERSION=$(shell docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php -r 'echo Phalcon\Version::get();'")
+ROOT_DIR       := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+VARIABLES_FILE  = $(ROOT_DIR)/variables.env
+PHALCON_VERSION = $(shell docker run -it --rm phalconphp/php-apache:ubuntu-16.04 sh -c "/usr/bin/php -r 'echo Phalcon\Version::get();'")
+SHELL          := $(shell which bash)
+VERSION         = 2.0.2
+
+.SILENT: ;               # no need for @
+.ONESHELL: ;             # recipes execute in same shell
+.NOTPARALLEL: ;          # wait for this target to finish
+.EXPORT_ALL_VARIABLES: ; # send all vars to shell
+default: help-default;   # default target
+Makefile: ;              # skip prerequisite discovery
+
+.title:
+	@echo -e "Phalcon Composer Builder: $(VERSION)\n"
+
+help-default help: .title
+	@echo "                          ====================================================================="
+	@echo "                          Help & Check Menu"
+	@echo "                          ====================================================================="
+	@echo "                    help: Show Phalcon Composer Help Menu: type: make help"
+	@echo "                   check: Check required files"
+	@echo "                 version: Check required files"
+	@echo "                          ====================================================================="
+	@echo "                          Main Menu"
+	@echo "                          ====================================================================="
+	@echo "                   build: Build or rebuild services"
+	@echo "                    pull: Pull latest dependencies"
+	@echo "                      up: Create and start application in detached mode (in the background)"
+	@echo "                   start: Start application"
+	@echo "                    stop: Stop application"
+	@echo "                  status: List containers status"
+	@echo "                  reset:  Reset all containers, delete all data, rebuild services and restart"
+	@echo ""
 
 build: check
 	docker-compose build --no-cache
-	docker-compose up -d
 
 pull:
 	docker pull mongo:3.2
@@ -30,10 +60,7 @@ stop:
 status:
 	docker-compose ps
 
-reset: check
-	docker-compose stop
-	docker-compose rm --force
-	docker-compose build --no-cache
+reset: check stop clean build up
 	docker-compose up -d
 
 check:
@@ -43,11 +70,12 @@ endif
 	docker-compose config -q
 
 version:
+	$(info Phalcon Composer $(VERSION))
 	$(info Phalcon $(PHALCON_VERSION))
 	docker-compose version
 
 clean: stop
-	docker-compose rm -f
+	docker-compose rm --force
 
 %:
 	@:
