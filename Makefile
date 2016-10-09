@@ -30,9 +30,9 @@ stop:
 status:
 	docker-compose ps
 
-rebuild: check
+reset: check
 	docker-compose stop
-	docker-compose rm --force php
+	docker-compose rm --force
 	docker-compose build --no-cache
 	docker-compose up -d
 
