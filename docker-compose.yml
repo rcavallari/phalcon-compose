@@ -84,7 +84,7 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data
 
-  php:
+  app:
     build: docker/app
     restart: always
     working_dir: /project
