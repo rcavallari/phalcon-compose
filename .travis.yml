@@ -31,8 +31,8 @@ before_install:
   - cp variables.env.example variables.env
 
 install:
-  - make help
   - make pull
+  - make help
 
 before_script:
   - make build
@@ -40,12 +40,17 @@ before_script:
   - sleep 1
 
 script:
+  - make up
+  - make status
+  - make stop
+  - make status
   - make start
   - make status
   - docker volume ls
   - make version || exit 1
   - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK' || exit 1
-  - make clean
+  - make reset
+  - make status
 
 notifications:
   email:
