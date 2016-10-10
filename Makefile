@@ -66,7 +66,6 @@ status:
 	docker-compose ps
 
 reset: check stop clean build up
-	docker-compose up -d
 
 check:
 ifeq ($(wildcard $(VARIABLES_FILE)),)
@@ -74,8 +73,7 @@ ifeq ($(wildcard $(VARIABLES_FILE)),)
 endif
 	docker-compose config -q
 
-version:
-	$(info Phalcon Compose $(VERSION))
+version: .title
 	$(info Phalcon $(PHALCON_VERSION))
 	docker-compose version
 
