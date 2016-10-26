@@ -48,7 +48,7 @@ services:
     ports:
       - "11300:11300"
     volumes:
-      - beanstalk:/data
+      - beanstalk:/var/lib/beanstalkd
 
   aerospike:
     restart: always
