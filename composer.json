@@ -22,7 +22,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('variables.env.example', 'variables.env');\""
+            "php -r \"file_exists('variables.env') || copy('variables.env.example', 'variables.env');\""
         ]
     },
     "extra": {
