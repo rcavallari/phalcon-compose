@@ -48,11 +48,11 @@ services:
     ports:
       - "11300:11300"
     volumes:
-      - beanstalk:/data
+      - beanstalk:/var/lib/beanstalkd
 
   aerospike:
     restart: always
-    image: aerospike:latest
+    image: aerospike:3.10.1
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -60,7 +60,6 @@ services:
       - "3003:3003"
     volumes:
       - aerospike:/opt/aerospike/data
-      - ./conf/aerospike/aerospike.conf:/etc/aerospike/aerospike.conf
 
   redis:
     restart: always
