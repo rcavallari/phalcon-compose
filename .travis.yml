@@ -20,6 +20,7 @@ before_install:
   - sudo service memcached stop
   - sudo service postgresql stop
   - sudo service docker stop
+  - sudo service mysql stop
   - sudo apt-get update -qq
   - sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes docker-engine
   - sudo service docker restart
