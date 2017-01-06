@@ -89,7 +89,7 @@ root:
 	docker exec -it -u root $$(docker-compose ps -q app) /bin/bash
 
 clean: stop
-	docker-compose rm --force app
+	docker-compose down
 
 %:
 	@:
