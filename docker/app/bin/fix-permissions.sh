@@ -12,17 +12,22 @@ set -o nounset
 # set -e : exit the script if any statement returns a non-true return value
 set -o errexit
 
-if [ -n "$APPLICATION_USER" ]; then
+APPLICATION_USER=${APPLICATION_USER:-}
+APPLICATION_GROUP=${APPLICATION_GROUP:-}
+APPLICATION_CACHE=${APPLICATION_CACHE:-}
+APPLICATION_LOGS=${APPLICATION_LOGS:-}
+
+if [ x"$APPLICATION_USER" != x ]; then
 	owner="$APPLICATION_USER"
-	if [ -n "$APPLICATION_GROUP" ]; then
+	if [ x"$APPLICATION_GROUP" != x ]; then
 		owner="${owner}:$APPLICATION_GROUP"
 	fi
 
-	if [ -n "$APPLICATION_CACHE" ] && [ -d "$APPLICATION_CACHE" ]; then
+	if [ x"$APPLICATION_CACHE" != x ] && [ -d "$APPLICATION_CACHE" ]; then
 		chown -R $owner ${APPLICATION_CACHE}
 	fi
 
-	if [ -n "$APPLICATION_LOGS" ] && [ -d "$APPLICATION_LOGS" ]; then
+	if [ x"$APPLICATION_LOGS" != x ] && [ -d "$APPLICATION_LOGS" ]; then
 		chown -R $owner ${APPLICATION_LOGS}
 	fi
 fi

@@ -12,7 +12,6 @@ set -o nounset
 # set -e : exit the script if any statement returns a non-true return value
 set -o errexit
 
-for container in $(docker ps -q)
-do
+for container in $(docker ps -q); do
     docker logs ${container}
 done
