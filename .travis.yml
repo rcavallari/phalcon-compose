@@ -1,4 +1,4 @@
-language: php
+language: generic
 
 sudo: required
 dist: trusty
@@ -9,6 +9,7 @@ env:
   - DOCKER_COMPOSE_VERSION="1.7.1"
   - DOCKER_COMPOSE_VERSION="1.8.0"
   - DOCKER_COMPOSE_VERSION="1.8.1"
+  - DOCKER_COMPOSE_VERSION="1.9.0"
 
 git:
   depth: 1
@@ -17,10 +18,7 @@ cache:
   - apt
 
 before_install:
-  - sudo service memcached stop
-  - sudo service postgresql stop
   - sudo service docker stop
-  - sudo service mysql stop
   - sudo apt-get update -qq
   - sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes docker-engine
   - sudo service docker restart
@@ -50,7 +48,8 @@ script:
   - make status
   - docker volume ls
   - make version
-  - curl -sI http://localhost:80 | grep 'HTTP/1.1 200 OK'
+  - curl -sI http://localhost:80   | grep 'HTTP/1.1 200 OK'
+  - curl -sI http://localhost:8080 | grep 'HTTP/1.1 200 OK'
   - make reset
   - make status
 

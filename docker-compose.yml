@@ -36,6 +36,16 @@ services:
     env_file:
         - variables.env
 
+  phpmyadmin:
+    restart: always
+    image: phpmyadmin/phpmyadmin:4.6
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    env_file:
+      - variables.env
+
   memcached:
     restart: always
     image: memcached:1.4
