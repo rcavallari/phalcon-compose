@@ -22,7 +22,7 @@ The current version can be seen at [phalcon-compose.readme.io][:compose:].
 Phalcon Compose is open source software licensed under the MIT.<br>
 See the [LICENSE.txt][:license:] file for more.<br>© 2016-2017 Serghei Iakovlev
 
-[:release:]:   https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.1.0
+[:release:]:   https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.1.1
 [:status:]:    https://travis-ci.org/sergeyklay/phalcon-compose
 [:phalcon:]:   https://github.com/phalcon/cphalcon
 [:downloads:]: https://packagist.org/packages/sergeyklay/phalcon-compose
