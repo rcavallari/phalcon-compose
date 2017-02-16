@@ -2,7 +2,7 @@
 
 # Phalcon Compose
 
-[![Version 2.1.0](https://img.shields.io/badge/version-v2.1.0-green.svg)][:release:]
+[![Version 2.1.1](https://img.shields.io/badge/version-v2.1.1-green.svg)][:release:]
 [![Build Status](https://travis-ci.org/sergeyklay/phalcon-compose.svg?branch=master)][:status:]
 [![Phalcon v3.0.3](https://img.shields.io/badge/phalcon-3.0.3-blue.svg)][:phalcon:]
 [![Downloads](https://img.shields.io/packagist/dt/sergeyklay/phalcon-compose.svg)][:downloads:]
@@ -22,7 +22,7 @@ The current version can be seen at [phalcon-compose.readme.io][:compose:].
 Phalcon Compose is open source software licensed under the MIT.<br>
 See the [LICENSE.txt][:license:] file for more.<br>© 2016-2017 Serghei Iakovlev
 
-[:release:]:   https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.1.0
+[:release:]:   https://github.com/sergeyklay/phalcon-compose/releases/tag/v2.1.1
 [:status:]:    https://travis-ci.org/sergeyklay/phalcon-compose
 [:phalcon:]:   https://github.com/phalcon/cphalcon
 [:downloads:]: https://packagist.org/packages/sergeyklay/phalcon-compose

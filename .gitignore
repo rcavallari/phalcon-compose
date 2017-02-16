@@ -1,15 +1,12 @@
-# Mac
-.DS_Store
-
-# IDE
-.idea
-nbproject
+# Please do not use this ignore file to define platform specific files.
+#
+# For these purposes create a global .gitignore file, which is a list of rules
+# for ignoring files in every Git repository on your computer.
+#
+# https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
 
 # Phalcon Developer Tools
 application/.phalcon/migration-version
 
-# Composer
 composer.lock
-composer.phar
-
 variables.env
