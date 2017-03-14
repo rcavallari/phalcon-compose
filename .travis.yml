@@ -59,6 +59,6 @@ after_failure:
 notifications:
   email:
     recipients:
-      - serghei@phalconphp.com
+      - build@phalconphp.com
     on_success: change
     on_failure: always
