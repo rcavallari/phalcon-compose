@@ -1,5 +1,5 @@
 {
-    "name": "sergeyklay/phalcon-compose",
+    "name": "phalcon/phalcon-compose",
     "description": "Open-source and community-driven boilerplate for Phalcon projects by using Docker and Docker Compose",
     "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
     "license": "MIT",
@@ -7,18 +7,23 @@
     "homepage": "https://phalcon-compose.readme.io/",
     "authors": [
         {
-            "name": "Serghei Iakovlev",
-            "email": "serghei@phalconphp.com"
+            "name": "Phalcon Team",
+            "email": "team@phalconphp.com",
+            "homepage": "http://phalconphp.com/en/team"
         },
         {
             "name": "Contributors",
-            "homepage": "https://github.com/sergeyklay/phalcon-compose/graphs/contributors"
+            "homepage": "https://github.com/phalcon/phalcon-compose/graphs/contributors"
         }
     ],
     "support": {
-        "source": "https://github.com/sergeyklay/phalcon-compose",
-        "issues": "https://github.com/sergeyklay/phalcon-compose/issues",
-        "docs": "https://phalcon-compose.readme.io/"
+        "source": "https://github.com/phalcon/phalcon-compose",
+        "issues": "https://github.com/phalcon/phalcon-compose/issues",
+        "docs": "https://phalcon-compose.readme.io/",
+        "forum": "https://forum.phalconphp.com/",
+        "wiki": "https://github.com/phalcon/cphalcon/wiki",
+        "irc": "irc://irc.freenode.org/phalconphp",
+        "rss" : "https://blog.phalconphp.com/rss"
     },
     "scripts": {
         "post-root-package-install": [
