@@ -22,7 +22,7 @@
         "docs": "https://phalcon-compose.readme.io/",
         "forum": "https://forum.phalconphp.com/",
         "wiki": "https://github.com/phalcon/cphalcon/wiki",
-        "irc": "irc://irc.freenode.org/phalconphp",
+        "irc": "irc://irc.freenode.org/phalcon-compose",
         "rss" : "https://blog.phalconphp.com/rss"
     },
     "scripts": {
