@@ -3,7 +3,7 @@ version: '2'
 services:
   mongo:
     restart: always
-    image: mongo:3.2
+    image: mongo:3.4
     expose:
       - "27017"
     ports:
@@ -13,7 +13,7 @@ services:
 
   postgres:
     restart: always
-    image: postgres:9.5
+    image: postgres:9.6-alpine
     expose:
       - "5432"
     ports:
@@ -48,7 +48,7 @@ services:
 
   memcached:
     restart: always
-    image: memcached:1.4
+    image: memcached:1.4-alpine
     ports:
       - "11211:11211"
 
@@ -62,7 +62,7 @@ services:
 
   aerospike:
     restart: always
-    image: aerospike:3.10.1
+    image: aerospike:latest
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -73,14 +73,14 @@ services:
 
   redis:
     restart: always
-    image: redis:latest
+    image: redis:3.2-alpine
     ports:
       - "6379:6379"
     volumes:
       - redis:/data
 
   elasticsearch:
-    image: elasticsearch:2.3
+    image: elasticsearch:5.2-alpine
     restart: always
     expose:
       - "9200"
@@ -104,6 +104,8 @@ services:
       - ./application:/project
       - ./cache:/project/cache
       - ./logs:/project/logs
+      - ./conf/php/cli.ini:/etc/php/7.0/cli/conf.d/100-custom.ini
+      - ./conf/php/fpm.ini:/etc/php/7.0/fpm/conf.d/100-custom.ini
     depends_on:
       - mysql
       - queue
