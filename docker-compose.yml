@@ -48,7 +48,7 @@ services:
 
   memcached:
     restart: always
-    image: memcached:1.4
+    image: memcached:1.4-alpine
     ports:
       - "11211:11211"
 
