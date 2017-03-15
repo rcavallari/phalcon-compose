@@ -62,7 +62,7 @@ services:
 
   aerospike:
     restart: always
-    image: aerospike:3.10.1
+    image: aerospike:latest
     ports:
       - "3000:3000"
       - "3001:3001"
