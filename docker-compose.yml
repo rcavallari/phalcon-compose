@@ -80,7 +80,7 @@ services:
       - redis:/data
 
   elasticsearch:
-    image: elasticsearch:2.3
+    image: elasticsearch:5.2-alpine
     restart: always
     expose:
       - "9200"
