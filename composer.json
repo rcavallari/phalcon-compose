@@ -1,5 +1,5 @@
 {
-    "name": "phalcon/phalcon-compose",
+    "name": "phalcon/compose",
     "description": "Open-source and community-driven boilerplate for Phalcon projects by using Docker and Docker Compose",
     "keywords": ["phalcon", "docker", "compose", "boilerplate", "skeleton"],
     "license": "MIT",
