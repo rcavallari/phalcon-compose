@@ -2,10 +2,10 @@
 
 # Phalcon Compose
 
-[![Version 2.2.0](https://img.shields.io/badge/version-v2.2.0-green.svg)][:release:]
+[![Version 2.2.1](https://img.shields.io/badge/version-v2.2.1-green.svg)][:release:]
 [![Build Status](https://travis-ci.org/phalcon/phalcon-compose.svg?branch=master)][:status:]
 [![Phalcon v3.0.4](https://img.shields.io/badge/phalcon-3.0.4-blue.svg)][:phalcon:]
-[![Downloads](https://img.shields.io/packagist/dt/sergeyklay/phalcon-compose.svg)][:downloads:]
+[![Downloads](https://img.shields.io/packagist/dt/phalcon/compose.svg)][:downloads:]
 
 The official Phalcon Docker Edition
 
@@ -25,7 +25,7 @@ See the [LICENSE.txt][:license:] file for more.<br>© 2016-2017 Phalcon Framewor
 [:release:]:   https://github.com/phalcon/phalcon-compose/releases
 [:status:]:    https://travis-ci.org/phalcon/phalcon-compose
 [:phalcon:]:   https://github.com/phalcon/cphalcon
-[:downloads:]: https://packagist.org/sergeyklay/phalcon-compose
+[:downloads:]: https://packagist.org/phalcon/compose
 [:docker:]:    https://www.docker.com
 [:compose:]:   https://phalcon-compose.readme.io
 [:license:]:   https://github.com/phalcon/phalcon-compose/blob/master/LICENSE.txt
