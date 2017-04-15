@@ -1,4 +1,7 @@
-language: generic
+language: ruby
+
+rvm:
+  - 2.3.1
 
 sudo: required
 dist: trusty
@@ -19,6 +22,7 @@ cache:
   - apt
 
 before_install:
+  - gem update bundler
   - sudo service docker stop
   - sudo apt-get update -qq
   - sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes docker-engine
@@ -33,6 +37,7 @@ before_install:
 install:
   - make pull
   - make help
+  - bundle install --path vendor/bundle
 
 before_script:
   - make build
@@ -40,19 +45,7 @@ before_script:
   - sleep 1
 
 script:
-  - make up
-  - sleep 1
-  - make status
-  - make stop
-  - make status
-  - make start
-  - make status
-  - docker volume ls
-  - make version
-  - curl -sI http://localhost:80   | grep 'HTTP/1.1 200 OK'
-  - curl -sI http://localhost:8080 | grep 'HTTP/1.1 200 OK'
-  - make reset
-  - make status
+  - bundle exec rspec spec
 
 after_failure:
   - bash bin/logs.sh

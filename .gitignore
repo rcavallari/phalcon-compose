@@ -10,3 +10,7 @@ application/.phalcon/migration-version
 
 composer.lock
 variables.env
+
+.bundle
+
+vendor
