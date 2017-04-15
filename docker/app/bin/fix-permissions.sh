@@ -24,10 +24,10 @@ if [ x"$APPLICATION_USER" != x ]; then
 	fi
 
 	if [ x"$APPLICATION_CACHE" != x ] && [ -d "$APPLICATION_CACHE" ]; then
-		chown -R $owner ${APPLICATION_CACHE}
+		chown -R ${owner} ${APPLICATION_CACHE}
 	fi
 
 	if [ x"$APPLICATION_LOGS" != x ] && [ -d "$APPLICATION_LOGS" ]; then
-		chown -R $owner ${APPLICATION_LOGS}
+		chown -R ${owner} ${APPLICATION_LOGS}
 	fi
 fi
