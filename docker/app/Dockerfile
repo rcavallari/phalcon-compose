@@ -1,7 +1,3 @@
-#
-# The Application Core Container
-#
-
 # Pull base image
 FROM phalconphp/php-apache:ubuntu-16.04
 
