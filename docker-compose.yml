@@ -101,9 +101,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./application:/project
-      - ./cache:/project/cache
-      - ./logs:/project/logs
+      - .:/project
       - ./conf/php/cli.ini:/etc/php/7.0/cli/conf.d/100-custom.ini
       - ./conf/php/fpm.ini:/etc/php/7.0/fpm/conf.d/100-custom.ini
     depends_on:
