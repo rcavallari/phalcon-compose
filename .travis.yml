@@ -4,7 +4,9 @@ rvm:
   - 2.3.1
 
 sudo: required
-dist: trusty
+
+services:
+  - docker
 
 env:
   - DOCKER_COMPOSE_VERSION="1.6.2"
@@ -23,10 +25,6 @@ cache:
 
 before_install:
   - gem update bundler
-  - sudo service docker stop
-  - sudo apt-get update -qq
-  - sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes docker-engine
-  - sudo service docker restart
   - sudo rm /usr/local/bin/docker-compose
   - curl -sSL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
