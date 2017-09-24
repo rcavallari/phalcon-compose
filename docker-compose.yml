@@ -38,7 +38,7 @@ services:
 
   phpmyadmin:
     restart: always
-    image: phpmyadmin/phpmyadmin:4.6
+    image: phpmyadmin/phpmyadmin:4.7
     depends_on:
       - mysql
     ports:
