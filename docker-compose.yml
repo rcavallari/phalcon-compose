@@ -33,6 +33,7 @@ services:
     volumes:
       - ./data/mysql:/docker-entrypoint-initdb.d
       - mysql:/var/lib/mysql
+      - ./conf/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     env_file:
         - variables.env
 
