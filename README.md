@@ -2,9 +2,9 @@
 
 # Phalcon Compose
 
-[![Version 2.3.1](https://img.shields.io/badge/version-v2.3.1-green.svg)][:release:]
+[![Version 2.4.1](https://img.shields.io/badge/version-v2.4.1-green.svg)][:release:]
 [![Build Status](https://travis-ci.org/phalcon/phalcon-compose.svg?branch=master)][:status:]
-[![Phalcon v3.2.2](https://img.shields.io/badge/phalcon-3.2.2-blue.svg)][:phalcon:]
+[![Phalcon v3.2.4](https://img.shields.io/badge/phalcon-3.2.4-blue.svg)][:phalcon:]
 [![Downloads](https://img.shields.io/packagist/dt/phalcon/compose.svg)][:downloads:]
 
 The official Phalcon Docker Edition
