@@ -18,7 +18,7 @@ describe "Dockerfile" do
     end
 
     it "installs the right version of Phalcon" do
-        expect(phalcon_version).to include("3.2.2")
+        expect(phalcon_version).to include("3.2.4")
     end
 
     describe 'Dockerfile#config' do
