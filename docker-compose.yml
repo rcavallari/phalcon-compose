@@ -93,7 +93,7 @@ services:
       - variables.env
     volumes:
       - esdata:/usr/share/elasticsearch/data
-
+      
   app:
     build: docker/app
     restart: always
@@ -113,6 +113,31 @@ services:
       - elasticsearch
     env_file:
       - variables.env
+    
+  web:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/src
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php
+    depends_on:
+      - mysql
+      - queue
+      - redis
+      - mongo
+      - elasticsearch
+    env_file:
+      - variables.env
+    
+    php:
+      image:phalconphp/php-fpm:7.1-min
+      volumes:
+        - ./src:/var/www/html
 
 volumes:
   mongo:
