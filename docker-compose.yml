@@ -138,6 +138,8 @@ services:
       image: phalconphp/php-fpm:7.1-min
       volumes:
         - ./project:/var/www/html
+        - ./conf/php/cli.ini:/etc/php/7.1/cli/conf.d/99-custom.ini
+        - ./conf/php/fpm.ini:/etc/php/7.1/fpm/conf.d/99-custom.ini
 
 volumes:
   mongo:
