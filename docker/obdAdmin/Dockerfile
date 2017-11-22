@@ -1,5 +1,5 @@
 # Pull base image
-FROM phalconphp/php-apache:ubuntu-16.04
+FROM phalconphp/nginx:latest
 
 MAINTAINER Serghei Iakovlev <serghei@phalconphp.com>
 
