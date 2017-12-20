@@ -109,7 +109,7 @@ services:
     depends_on:
       - redis
     env_file:
-      - loserhub_variables.env
+      - loserhub.variables.env
     
   php:
     image: phalconphp/php-fpm:7-min
